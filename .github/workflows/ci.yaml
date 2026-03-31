@@ -1,4 +1,4 @@
-name: CI
+name: Build Test
 on: [push]
 
 jobs:
@@ -7,6 +7,20 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
+
+            - name: Setup Node
+              run: actions/setup-node@v4
+              with: 
+                node-version: 20
             
-            - name: Run something
-              run: echo "Hellow world" 
+            - name: Install dependencies
+              run: npm install
+            
+            - name: Run Server
+              run: node server.js & sleep 5
+            
+            - name: Test Endpoint
+              run: cural --fail http://localhost:3000/gps
+            
+            - name: Docker Build Test
+              run: docker build -t gpu-service-test .
