@@ -9,7 +9,7 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Setup Node
-              run: actions/setup-node@v4
+              uses: actions/setup-node@v4
               with: 
                 node-version: 20
             
@@ -20,7 +20,7 @@ jobs:
               run: node server.js & sleep 5
             
             - name: Test Endpoint
-              run: cural --fail http://localhost:3000/gps
+              run: curl --fail http://localhost:3000/gps
             
             - name: Docker Build Test
-              run: docker build -t gpu-service-test .
+              run: docker build -t gps-service-test .
