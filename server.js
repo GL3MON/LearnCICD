@@ -13,7 +13,6 @@ const httpRequestDuration = new client.Histogram({
     buckets: [0.005, 0.01, 0.05, 0.1, 0.3, 0.5, 1, 2, 5]
 })
 
-
 register.registerMetric(httpRequestDuration)
 
 function prometheusMiddleware(req, res, next) {
